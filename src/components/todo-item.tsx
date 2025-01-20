@@ -1,7 +1,9 @@
+import { JSX } from "react";
+import { motion } from "framer-motion";
 import { Trash2, Edit } from "lucide-react";
+
 import type { Todo } from "@/types/todo";
 import { Draggable } from "@hello-pangea/dnd";
-import { JSX } from "react";
 
 /**
  * Props for `TodoItem` component
@@ -85,30 +87,64 @@ export function TodoItem({
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="group flex items-center justify-between rounded-lg bg-white/50 p-3 shadow-sm"
+          className="group flex items-start justify-between rounded-lg bg-white/50 p-3 shadow-sm"
         >
-          <div className="flex items-center gap-4">
-            <div className="relative">
+          <div className="flex items-start gap-4">
+            <motion.div
+              className="relative h-5 w-5 flex-shrink-0"
+              initial={false}
+              animate={todo.completed ? "checked" : "unchecked"}
+            >
+              <motion.div
+                className="absolute inset-0 rounded-full border-2 border-gray-300"
+                variants={{
+                  checked: { borderColor: "#3b82f6", background: "#3b82f6" },
+                  unchecked: { borderColor: "#d1d5db", background: "white" },
+                }}
+                transition={{ duration: 0.2 }}
+              />
+              <motion.svg
+                className="absolute inset-0 h-full w-full"
+                viewBox="0 0 24 24"
+                variants={{
+                  checked: { opacity: 1, scale: 1 },
+                  unchecked: { opacity: 0, scale: 0.8 },
+                }}
+                transition={{ duration: 0.2 }}
+              >
+                <motion.path
+                  d="M5 13l4 4L19 7"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth={3}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  variants={{
+                    checked: { pathLength: 1 },
+                    unchecked: { pathLength: 0 },
+                  }}
+                  transition={{ duration: 0.2 }}
+                />
+              </motion.svg>
               <input
                 type="checkbox"
                 checked={todo.completed}
                 onChange={() => onToggle(todo.id)}
-                className="peer h-5 w-5 cursor-pointer appearance-none rounded-full border-2 border-gray-300 transition-colors checked:border-blue-500 checked:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
               />
-              <svg
-                className="pointer-events-none absolute left-0.5 top-0.5 h-4 w-4 fill-none stroke-white stroke-2 opacity-0 transition-opacity peer-checked:opacity-100"
-                viewBox="0 0 24 24"
-              >
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-            <span
-              className={todo.completed ? "text-gray-500 line-through" : ""}
+            </motion.div>
+            <motion.span
+              animate={{
+                color: todo.completed ? "#9ca3af" : "#000000",
+                textDecoration: todo.completed ? "line-through" : "none",
+              }}
+              transition={{ duration: 0.2 }}
+              className="max-h-[4.5em] overflow-hidden text-ellipsis line-clamp-3"
             >
               {todo.text}
-            </span>
+            </motion.span>
           </div>
-          <div className="flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+          <div className="flex gap-2 opacity-0 transition-opacity group-hover:opacity-100 self-start mt-0.5">
             <button onClick={() => onEdit(todo)}>
               <Edit className="h-5 w-5 text-gray-500 hover:text-blue-500" />
             </button>
