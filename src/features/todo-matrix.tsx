@@ -21,10 +21,10 @@ import type { Todo, TodoPriority, TodoSection } from "@/types/todo";
  *  - an empty list of todos
  */
 const initialSections: TodoSection[] = [
-  { id: "DO_FIRST", title: "DO FIRST", color: "bg-green-100", todos: [] },
-  { id: "DO_LATER", title: "DO LATER", color: "bg-blue-100", todos: [] },
-  { id: "DELEGATE", title: "DELEGATE", color: "bg-yellow-100", todos: [] },
-  { id: "ELIMINATE", title: "ELIMINATE", color: "bg-red-100", todos: [] },
+  { id: "DO_FIRST", title: "Do First", color: "bg-green-100", todos: [] },
+  { id: "DO_LATER", title: "Do Later", color: "bg-blue-100", todos: [] },
+  { id: "DELEGATE", title: "Delegate", color: "bg-yellow-100", todos: [] },
+  { id: "ELIMINATE", title: "Eliminate", color: "bg-red-100", todos: [] },
 ];
 
 /**
@@ -158,14 +158,13 @@ export default function TodoMatrix(): JSX.Element {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <div className="relative grid h-[calc(100vh-4rem)] grid-cols-2 gap-4">
+    <div className="min-h-screen bg-gray-100 px-4 py-8 h-full">
+      <div className="relative grid h-[calc(100vh-4rem)] grid-cols-2">
         <DragDropContext onDragEnd={onDragEnd}>
           {sections.map((section) => (
-            <div key={section.id} className={`${section.color} rounded-lg p-4`}>
-              <div className="mb-4 flex items-center justify-between">
+            <div key={section.id} className={`${section.color} p-4`}>
+              <div className="my-2 ml-4 flex items-center justify-between">
                 <h2 className="text-lg font-semibold">{section.title}</h2>
-                <PenSquare className="h-5 w-5 text-gray-600" />
               </div>
               <Droppable droppableId={section.id}>
                 {(provided) => (
