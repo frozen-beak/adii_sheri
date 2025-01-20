@@ -159,10 +159,13 @@ export default function TodoMatrix(): JSX.Element {
 
   return (
     <div className="min-h-screen bg-gray-100 px-4 py-8 h-full">
-      <div className="relative grid h-[calc(100vh-4rem)] grid-cols-2">
+      <div className="relative grid h-[calc(100vh-4rem)] grid-cols-2 grid-rows-2">
         <DragDropContext onDragEnd={onDragEnd}>
           {sections.map((section) => (
-            <div key={section.id} className={`${section.color} p-4`}>
+            <div
+              key={section.id}
+              className={`${section.color} p-4 flex flex-col h-full`}
+            >
               <div className="my-2 ml-4 flex items-center justify-between">
                 <h2 className="text-lg font-semibold">{section.title}</h2>
               </div>
@@ -171,7 +174,7 @@ export default function TodoMatrix(): JSX.Element {
                   <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className="space-y-2"
+                    className="space-y-2 flex-grow overflow-y-auto pr-2"
                   >
                     {section.todos.map((todo, index) => (
                       <TodoItem
