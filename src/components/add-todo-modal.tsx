@@ -5,7 +5,7 @@ import { Input } from "@/ui/input";
 import { JSX, useState } from "react";
 
 /**
- * Props for the `AddTodoModal` component.
+ * Props for the `AddTodoModal` component
  */
 interface AddTodoModalProps {
   /**
@@ -30,13 +30,13 @@ interface AddTodoModalProps {
 /**
  * # `AddTodoModal`
  *
- * A modal component for adding new todos.
+ * A modal component for adding new todos
  *
  * ## Props:
  *
- * - `open`: Controls whether the modal is visible.
- * - `onClose`: Callback to close the modal.
- * - `onAdd`: Callback to add a new todo with the entered text.
+ * - `open`: Controls whether the modal is visible
+ * - `onClose`: Callback to close the modal
+ * - `onAdd`: Callback to add a new todo with the entered text
  *
  * ## Usage:
  *
@@ -48,8 +48,8 @@ interface AddTodoModalProps {
  * />
  * ```
  *
- * @param {AddTodoModalProps} props - The properties passed to the component.
- * @returns {JSX.Element} A dialog component for adding todos.
+ * @param {AddTodoModalProps} props - The properties passed to the component
+ * @returns {JSX.Element} A dialog component for adding todos
  */
 export function AddTodoModal({
   open,
@@ -61,7 +61,7 @@ export function AddTodoModal({
   /**
    * Handles the form submission to add new todo
    *
-   * @param e - The form submission event.
+   * @param e - The form submission event
    */
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,7 +86,8 @@ export function AddTodoModal({
             placeholder="What needs to be done?"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            autoFocus // Automatically focus on the input when the modal opens.
+            // Auto focus on the input when the modal opens
+            autoFocus
           />
           <div className="flex justify-end gap-3">
             <Button type="button" variant="outline" onClick={onClose}>
