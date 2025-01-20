@@ -1,6 +1,16 @@
+import TodoMatrix from "@/features/todo-matrix";
+import { JSX } from "react";
+
 /**
- * We're here because we are not free
+ * # `Home`
+ *
+ * [TodoMatrix] served on default route -> `/`
+ *
+ * You take the blue pill, the story ends. You take the red pill, you stay in Todo-land,
+ * and I show you how deep the productivity rabbit hole goes.
+ *
+ * @returns {JSX.Element} Homepage
  */
-export default function Home() {
-  return <div></div>;
+export default function Home(): JSX.Element {
+  return <TodoMatrix />;
 }
