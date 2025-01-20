@@ -5,10 +5,12 @@ import { JSX } from "react";
 
 /**
  * Props for `TodoItem` component
+ *
+ * > `Morpheus`: 'I can only show you the door. You’re the one who has to cross it... and finish your todos.'
  */
 interface TodoItemProps {
   /**
-   * The [ToDo] item to be displayed
+   * The [Todo] item to be displayed
    */
   todo: Todo;
 
