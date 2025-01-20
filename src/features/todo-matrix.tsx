@@ -1,7 +1,7 @@
 "use client";
 
-import { JSX, useState } from "react";
-import { Plus, PenSquare } from "lucide-react";
+import { JSX, useState, useEffect } from "react";
+import { Plus } from "lucide-react";
 import { DragDropContext, Droppable } from "@hello-pangea/dnd";
 
 import { TodoItem } from "@/components/todo-item";
@@ -28,6 +28,14 @@ const initialSections: TodoSection[] = [
 ];
 
 /**
+ * # Local Storage Key
+ *
+ * This is the One Key to rule your todos. Without it, your tasks are lost
+ * in the Matrix.
+ */
+const LOCAL_STORAGE_KEY = "todoMatrixSections";
+
+/**
  * # `TodoMatrix`
  *
  * Component to render the todo matrix
@@ -51,6 +59,19 @@ export default function TodoMatrix(): JSX.Element {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const [editingTodo, setEditingTodo] = useState<Todo | null>(null);
+
+  // Load todos from local storage on initial render
+  useEffect(() => {
+    const storedSections = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedSections) {
+      setSections(JSON.parse(storedSections));
+    }
+  }, []);
+
+  // Save todos to local storage whenever they change
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(sections));
+  }, [sections]);
 
   /**
    * Handles adding a new [Todo]
